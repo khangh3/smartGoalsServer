@@ -1,7 +1,15 @@
 import express from "express";
+import db from "../db/conn.js";
 
-const dates = express.Router();
+const goals = express.Router();
 
-dates.get("/", async (req, res) => {
-  const collection = db.collection;
+goals.get("/", async (req, res) => {
+  const collection = db.collection("date");
+  const cursor = collection.find();
+  const dates = {
+    Dates: await cursor.toArray(),
+  };
+  res.json(dates);
 });
+
+export default goals;

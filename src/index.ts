@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import "./loadenvironment";
-import { env } from "process";
+import "./loadenvironment.js";
+import goals from "./routes/goals.js";
 
 const app = express();
 app.use(
@@ -17,6 +17,8 @@ app.get("/", (req, res) => {
   res.json("hello");
 });
 
+app.use("/goals", goals);
+
 app.listen(process.env.PORT, () =>
-  console.log(`Listening at PORT: https://localhost:${process.env.PORT}`),
+  console.log(`Listening at PORT: ${process.env.PORT}`),
 );
